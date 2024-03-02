@@ -151,17 +151,14 @@
             <th>Sueldo</th>
             <td><%= usuario.getSueldo() %></td>
         </tr>
-        <tr>
-            <th>Ruta de la Imagen</th>
-            <td><%= usuario.getImagen() %></td>
-        </tr>
+        
         <tr>
             <th>Fecha de Alta</th>
             <td><%= usuario.getFechaalta() %></td>
         </tr>
         <tr>
             <th>Precio Total de coches </th>
-            <td><%= usuario.getPrecioTotalCoches() %></td>
+            <td><%= usuario.getPrecioTotalCoches() + " Euros" %></td>
         </tr>
     </table>
         <!-- No se debe mostrar la contraseña en la interfaz de usuario -->
@@ -175,7 +172,7 @@
     <nav>
         <ul>
             <li><a href="ServletTablaCoche" class="button">Ver Coches de <%= usuario.getNombre() %> </a></li>
-            <li><a href="ServletListaCoches" class="button">Lista de coches en el concesionario</a></li>  
+            <li><a href="ServletListaCoches" class="button">Lista en cajas de coches en el concesionario</a></li>  
              <li><a href="ServletPrecioTotal" class="button2">Calcular precio total</a></li>  
              
            

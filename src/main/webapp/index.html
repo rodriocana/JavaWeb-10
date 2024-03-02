@@ -20,7 +20,7 @@
 
                 background-image: url('https://wallpapercave.com/wp/wp12506189.jpg');
                 background-repeat: no-repeat;
-               
+
 
             }
             .background{
@@ -104,8 +104,8 @@
                 border-radius: 5px;
                 cursor: pointer;
             }
-            
-            
+
+
             .social{
                 margin-top: 30px;
                 display: flex;
@@ -130,42 +130,6 @@
             }
 
         </style>
-
-
-        <script>
-            function validarFormulario() {
-                var nombreUsuario = document.getElementById("NombreUsuario").value;
-                var passwordUsuario = document.getElementById("passwordUsuario").value;
-
-                // Verificar si los campos están vacíos
-                if (nombreUsuario === "" || passwordUsuario === "") {
-                    alert("Por favor, complete todos los campos.");
-                    return false; // Evitar el envío del formulario
-                }
-
-                // Realizar una solicitud AJAX al servidor para verificar el usuario y la contraseña
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "validarUsuarioServlet", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var respuesta = xhr.responseText;
-                        if (respuesta === "true") {
-                            // Usuario y contraseña válidos, permitir el envío del formulario
-                            return true;
-                        } else {
-                            // Usuario o contraseña inválidos, mostrar un mensaje de error y evitar el envío del formulario
-                            alert("Usuario o contraseña incorrectos.");
-                            return false;
-                        }
-                    }
-                };
-                var datos = "nombreUsuario=" + encodeURIComponent(nombreUsuario) + "&passwordUsuario=" + encodeURIComponent(passwordUsuario);
-                xhr.send(datos);
-                return false; // Evitar el envío del formulario antes de que se complete la solicitud AJAX
-            }
-        </script>
-
     </head>
 
 

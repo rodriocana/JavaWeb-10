@@ -71,46 +71,61 @@ public class baseDatosServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            String nombre = request.getParameter("NombreUsuario");
-            String password = request.getParameter("passwordUsuario");
-
-            // Suponiendo que JavaConnect es la clase que maneja la conexión a la base de datos
-            JavaConnect.connectdb();
-
-            String consulta = "SELECT * FROM usuario WHERE nombre = ? AND password = ?";
-            java.sql.Connection conexion = JavaConnect.getConnection();
-            PreparedStatement sentencia = conexion.prepareStatement(consulta);
-            sentencia.setString(1, nombre);
-            sentencia.setString(2, password);
-            ResultSet rs = sentencia.executeQuery();
-
-            if (rs.next()) {
-                // si existe el usuario y contraseña, crea una sesion
-                int numeroUsuario = rs.getInt("Numero");
-                int sueldo = rs.getInt("sueldo");
-                String rutaImagen = rs.getString("ruta_imagen");
-                String fechaAlta = rs.getString("fechaalta");
-                int precioTotalCoches = rs.getInt("preciototalcoches");
-
-                Usuario usuario = new Usuario(numeroUsuario, nombre, sueldo, rutaImagen, fechaAlta, precioTotalCoches);
-
-                HttpSession sesion = request.getSession();
-                sesion.setAttribute("usuario", usuario);
-
-                sesion.setAttribute("nombreUsuario", nombre); // Guardar el nombre de usuario en la sesión
-                response.sendRedirect("MenuPrincipal.jsp"); // esta linea redirige a una pagina a parte
-            } else {
-
-                response.sendRedirect("error.jsp?mensaje=Credenciales incorrectas");  // esta linea redirige a la pantalla ERROR enviandole un texto.
-
+            
+            try {
+                String nombre = request.getParameter("NombreUsuario");
+                String password = request.getParameter("passwordUsuario");
+                
+                // Suponiendo que JavaConnect es la clase que maneja la conexión a la base de datos
+                JavaConnect.connectdb();
+                
+                String consulta = "SELECT * FROM usuario WHERE nombre = ? AND password = ?";
+                java.sql.Connection conexion = JavaConnect.getConnection();
+                PreparedStatement sentencia = conexion.prepareStatement(consulta);
+                sentencia.setString(1, nombre);
+                sentencia.setString(2, password);
+                ResultSet rs = sentencia.executeQuery();
+                
+                if (rs.next()) {
+                    // si existe el usuario y contraseña, crea una sesion
+                    int numeroUsuario = rs.getInt("Numero");
+                    int sueldo = rs.getInt("sueldo");
+                    String rutaImagen = rs.getString("ruta_imagen");
+                    String fechaAlta = rs.getString("fechaalta");
+                    int precioTotalCoches = rs.getInt("preciototalcoches");
+                    
+                    Usuario usuario = new Usuario(numeroUsuario, nombre, sueldo, rutaImagen, fechaAlta, precioTotalCoches);
+                    
+                    HttpSession sesion = request.getSession();
+                    sesion.setAttribute("usuario", usuario);
+                    
+                    sesion.setAttribute("nombreUsuario", nombre); // Guardar el nombre de usuario en la sesión
+                    response.sendRedirect("MenuPrincipal.jsp"); // esta linea redirige a una pagina a parte
+                } else {
+                    
+                    response.sendRedirect("error.jsp?mensaje=Credenciales incorrectas");  // esta linea redirige a la pantalla ERROR enviandole un texto.
+                    
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(baseDatosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendRedirect("error.jsp"); // Redirigir a una página de error en caso de excepción
             }
 
+            String nombre = request.getParameter("NombreUsuario");
+            
+            java.sql.Connection conexion = JavaConnect.getConnection();
+            String actualizarPrecio = "UPDATE USUARIO SET preciototalcoches = ? WHERE nombre = ?";
+            PreparedStatement sentenciaActualizar = conexion.prepareStatement(actualizarPrecio);
+            sentenciaActualizar.setInt(1, 0);
+            sentenciaActualizar.setString(2, nombre);
+            sentenciaActualizar.executeUpdate();
+            
+            JavaConnect.cerrarConexion();
+            
         } catch (SQLException ex) {
             Logger.getLogger(baseDatosServlet.class.getName()).log(Level.SEVERE, null, ex);
-            response.sendRedirect("error.jsp"); // Redirigir a una página de error en caso de excepción
         }
-
-        JavaConnect.cerrarConexion();
 
     }
 
