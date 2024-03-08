@@ -10,74 +10,12 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <style>
-        .coches-section {
-            margin: 20px;
-        }
+    
+        <link rel="stylesheet" type="text/css" href="StyleTablas.css">
 
-        body{
-
-            background-image: url('https://wallpapercave.com/uwp/uwp4256581.webp');
-            background-repeat: no-repeat;
-
-
-        }
-
-        .button{
-            margin-top: 100px;
-            width: 100%;
-            background-color: rgba(132, 204, 235, 0.9);
-            color: #080710;
-            padding: 15px;
-            font-size: 10px;
-            font-weight: 600;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .button:hover{
-
-            background-color: #0056b3;
-            transform: translateY(5px);
-
-        }
-
-        .buttonLogOut{
-
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translate(-50%, 50%);
-            width: 10%;
-            background-color: rgba(240, 73, 73, 0.8);
-            color: #080710;
-            padding: 15px;
-            font-size: 10px;
-            font-weight: 600;
-            border-radius: 5px;
-            border: 2px solid white; /* Agrega un borde de 2px con color negro */
-            cursor: pointer;
-            text-align: center;
-
-
-        }
-
-        .coches-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .coches-table th, .coches-table td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        .coches-table th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
+
+
 
 <body>
     <h2>Lista de Coches de <%= session.getAttribute("nombreUsuario") %></h2>
@@ -96,8 +34,6 @@
                     <th>Color</th>
                     <th>Modelo</th>
                     <th>Precio</th>
-
-
                 </tr>
             </thead>
             <tbody>

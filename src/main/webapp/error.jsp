@@ -20,8 +20,7 @@
             }
             body{
 
-                background-image: url('https://wallpapercave.com/wp/wp11707041.jpg'); 
-                background-repeat: no-repeat;
+               
             }
             .background{
                 width: 430px;
@@ -46,7 +45,7 @@
                 text-align: center;
                 margin-top: 40px;
                 font-family: 'Poppins',sans-serif;
-                color: #ffffff;
+                color: #FC1717;
                 letter-spacing: 0.5px;
                 outline: none;
                 border: none;
@@ -59,12 +58,13 @@
     font-size: 18px;
     font-weight: 600;
     border-radius: 10px;
+    margin-top: 20px;
     padding: 10px 20px;
     border: 2px solid #080710;
     cursor: pointer;
    }
             
-            </style>
+        </style>
     
     <title>Error</title>
 </head>

@@ -12,20 +12,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author Rodri
  */
-@WebServlet(name = "ServletListaCoches", urlPatterns = {"/ServletListaCoches"})
-public class ServletListaCoches extends HttpServlet {
+@WebServlet(name = "ServletBorrar", urlPatterns = {"/ServletBorrar"})
+public class ServletBorrar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,46 +39,27 @@ public class ServletListaCoches extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-
-        JavaConnect.connectdb();
-
-        int numeroUsuario = usuario.getNumero();
-
-        // Consulta para obtener los coches del usuario
-        String consultaCoches = "SELECT * FROM COCHE";
-
-        java.sql.Connection conexion = JavaConnect.getConnection();
-
+        
         try {
-          
-            Statement statement = conexion.createStatement();
-
+            Coche coche = (Coche) request.getSession().getAttribute("id");
             
-            ResultSet rsCoches = statement.executeQuery(consultaCoches);
+            JavaConnect.connectdb();
             
-            ArrayList<Coche> cochesTotales = new ArrayList<>();  // este arraylist lo lleno de datos y se lo paso luego como atributo a la clase listacoches.jsp
-
-
-            while (rsCoches.next()) {
-                Coche coche = new Coche();
-                coche.setCod_coche(rsCoches.getInt("cod_coche"));
-                coche.setModelo(rsCoches.getString("modelo"));
-                coche.setColor(rsCoches.getString("color"));
-                coche.setPrecio(rsCoches.getInt("precio"));
-                coche.setRutaimagen(rsCoches.getString("rutaimagen"));
-                cochesTotales.add(coche);
-            }
-
-            // Almacenar la lista de coches en la sesión
-            HttpSession session = request.getSession();
-            session.setAttribute("coches", cochesTotales);  // este atributo se lo paso a listaCoches.jsp
-
-            response.sendRedirect("listaCoches.jsp");
-        } catch (Exception e) {
-
+            int codigoCoche = coche.getCod_coche();
+            
+            
+            // Consulta para obtener los coches del usuario
+            java.sql.Connection conexion = JavaConnect.getConnection();
+            
+            String borrarCoche = "DELETE  FROM COCHE WHERE cod_coche = ?";
+            PreparedStatement sentenciaPrecioTotal = conexion.prepareStatement(borrarCoche);
+            sentenciaPrecioTotal.setInt(1, codigoCoche);
+            ResultSet rsPrecioTotal = sentenciaPrecioTotal.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServletBorrar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

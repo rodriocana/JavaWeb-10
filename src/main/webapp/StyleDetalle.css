@@ -1,0 +1,41 @@
+   
+          .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .button:hover{
+
+            background-color: #0056b3;
+            transform: translateY(5px);
+
+        }
+
+        .buttonLogOut{
+
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            width: 10%;
+            background-color: rgba(240, 73, 73, 0.8);
+            color: #080710;
+            padding: 15px;
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 5px;
+            border: 2px solid white; /* Agrega un borde de 2px con color negro */
+            cursor: pointer;
+            text-align: center;
+
+
+        }
+            

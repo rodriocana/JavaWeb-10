@@ -1,0 +1,42 @@
+ .coche-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-right: 10px; 
+            width: 200px;
+            display: inline-block;
+        }
+        .coche-info {
+            font-weight: bold;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .buttonLogOut{
+
+            position: fixed;
+            bottom: 80px;
+            left: 90%;
+            transform: translate(-50%, 50%);
+            width: 10%;
+            background-color: rgba(240, 73, 73, 0.8);
+            color: #080710;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 5px;
+            
+            border: 2px solid black; 
+            cursor: pointer;
+            text-align: center;
+           
+
+            }
